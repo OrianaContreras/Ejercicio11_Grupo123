@@ -19,7 +19,7 @@ export default new Vuex.Store({
             valor: "proyecto1",
             path: "/tareasPorProyecto/proyecto1"
         }, {
-            valor: "proyecto2",
+            valor: "proyecto3",
             path: "/tareasPorProyecto/proyecto2"
         }],
         arrayTareas: [],
