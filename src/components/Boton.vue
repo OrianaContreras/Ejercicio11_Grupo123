@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-col class="mt-3">
-      <b-button type="button" variant="primary" @click=agregarTareaAction() :disabled=disabled >Agregar</b-button
+      <b-button type="button" variant="primary" @click=agregarTareaAction() :disabled=condicion >Agregar</b-button
       ></b-col
     >
   </div>
@@ -13,7 +13,7 @@ export default {
   name:"Boton",
   computed:{
     ...mapState([ 
-      "disabled"
+      "condicion"
     ])
   },
   methods:{

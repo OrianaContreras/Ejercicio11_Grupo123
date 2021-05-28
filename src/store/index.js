@@ -13,45 +13,44 @@ export default new Vuex.Store({
             Descripcion: ""
         },
         arrayRutas: [{
-            valor: "Home",
-            path: "/"
-        }, {
-            valor: "proyecto1",
-            path: "/tareasPorProyecto/proyecto1"
-        }, {
-            valor: "proyecto2",
-            path: "/tareasPorProyecto/proyecto2"
-        }],
+                valor: "Home",
+                path: "/"
+            },
+            {
+                valor: "proyecto1",
+                path: "/tareasPorProyecto/proyecto1"
+            },
+            {
+                valor: "proyecto2",
+                path: "/tareasPorProyecto/proyecto2"
+            }
+        ],
+        arrayfiltrado: [],
         arrayTareas: [],
-        arrayColores: ["danger","success","warning", "info", "primary", "secondary", "light", "dark"],
-        disabled: true
+        arrayColores: ["danger", "success", "warning", "primary", "secondary", "dark"],
+        condicion: true
     },
     mutations: {
-        checkers(state, disabled) {
-            state.disabled = disabled
+        checkers(state, condicion) {
+            state.condicion = condicion
         },
         agregarTarea(state) {
             state.arrayTareas.push({
                 ...state.form,
                 id: Date.now().toString(36) + (Math.random() * 100).toString(36)
-
             })
             console.log(state.arrayTareas)
         },
         eliminarTarea(state, id) {
-
             state.arrayTareas = state.arrayTareas.filter(el => el.id != id)
-
         },
-
         filtroDelArrayVista(state, NombreProyecto) {
-            state.arregloFiltrado = state.arrayTareas.filter(el => el.NombreProyecto == NombreProyecto)
-            console.log(state.arregloFiltrado)
-
+            state.arrayfiltrado = state.arrayTareas.filter(el => el.NombreProyecto == NombreProyecto)
+            console.log(state.arrayfiltrado)
         }
-
-
     },
+
+
     actions: {
         inputCheckers({
             commit,
@@ -65,6 +64,11 @@ export default new Vuex.Store({
                 commit("checkers", false);
             }
         },
+        agregarRutaAction({
+            commit
+        }, valor, path) {
+            commit("agregarRuta", valor, path)
+        },
         agregarTareaAction({
             commit
         }) {
@@ -75,15 +79,19 @@ export default new Vuex.Store({
         }, id) {
             commit("eliminarTarea", id)
         },
-        tareasPorProyectoAction(state, NombreProyecto) {
-            state.commit("filtroDelArrayVista", NombreProyecto)
+        tareasPorProyectoAction({
+            commit
+        }, ProjectName) {
+            commit("filtroDelArrayVista", ProjectName)
 
         },
     },
     getters: {
         mostrarRutasProyectos: function (state) {
-
             return state.arrayRutas
+        },
+        valorArregloColores: function (state) {
+            return state.arrayColores.length
 
         }
     }

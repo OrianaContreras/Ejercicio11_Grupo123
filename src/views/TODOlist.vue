@@ -7,7 +7,7 @@
           <Boton />
         </b-col>
         <b-col class="col-8 d-flex">
-          <Card />
+          <Card :array= "arrayTareas"/>
         </b-col>
       </b-row>
     </div>
@@ -18,9 +18,12 @@
 import Formulario from "@/components/FormularioTarea.vue";
 import Card from "@/components/Card.vue";
 import Boton from "@/components/Boton.vue";
-
+import {mapState} from "vuex"
 export default {
   name: "TODOlist",
+    computed: {
+    ...mapState(["arrayTareas"]),
+  },
   components: {
     Formulario,
     Card,
