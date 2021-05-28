@@ -3,9 +3,9 @@
     <b-row>
       <b-col class="d-flex justify-content-center">
         <b-row class="mx-auto">
-          <b-col v-for = "tarea, index in arrayTareas" :key="index">
+          <b-col v-for = "tarea, index in array" :key="index">
             <b-card
-              :bg-variant="arrayColores[3]"
+              :bg-variant="arrayColores[Math.floor(Math.random() * valorArregloColores)]"
               text-variant="white"
               header="Tareas"
               class="text-center"
@@ -17,7 +17,7 @@
               <b-card-text>Nombre de Proyecto: {{ tarea.NombreProyecto }}</b-card-text> 
               <b-card-text>Descripcion: {{ tarea.Descripcion }}</b-card-text>
               <div class="d-flex justify-content-end mt-3">
-                {{tarea.id}}<b-icon icon="trash-fill" aria-hidden="true" font-scale="1.5" @click="borrarTareaAction(tarea.id)" style="cursor: pointer"></b-icon>
+                <b-icon icon="trash-fill" aria-hidden="true" font-scale="1.5" @click="borrarTareaAction(tarea.id)" style="cursor: pointer"></b-icon>
               </div>
             </b-card>
           </b-col>
@@ -28,14 +28,17 @@
 </template>
 
 <script>
-import { mapState, mapActions} from "vuex"
+import { mapState, mapActions, mapGetters} from "vuex"
 
 export default {
   
   name: "Card",
+  props:{
+    array:Array
+  },
 computed: {
-  ...mapState(['arrayTareas']),
-          ...mapState(['arrayColores']),
+  ...mapState(['arrayColores','largoColores']),
+  ...mapGetters (["valorArregloColores"])        
       },
   methods:{
 
@@ -45,9 +48,10 @@ computed: {
 
     ])
     },
-  created() {
-  },
+
 };
+
+  
 </script>
 <style>
 .pointer {

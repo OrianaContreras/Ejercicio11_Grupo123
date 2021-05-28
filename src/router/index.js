@@ -26,7 +26,7 @@ const routes = [
     },
     {
         path: "/tareasPorProyecto/:proyecto",
-        name: "TareasPorProyecto",
+        name: "tareasPorProyecto",
         component: LandingTareasPorProyecto,
     },
 ];
